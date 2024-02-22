@@ -6,6 +6,8 @@ class Course(models.Model):
     name=models.CharField(max_length=1000)
     date_created= models.DateTimeField(auto_now_add=True,blank=True, null=True)
     date_modified= models.DateTimeField(auto_now=True, blank=True, null=True)
+    def __str__(self):
+        return f"{self.name}"
 
 class ClassSchedule(models.Model):
     REPEAT_CHOICES = [
@@ -24,6 +26,11 @@ class ClassSchedule(models.Model):
     organizer = models.ForeignKey(IMUser, on_delete=models.CASCADE, related_name='organized_classes')
     cohort = models.ForeignKey(Cohort, on_delete=models.CASCADE, related_name='classes')
     venue = models.CharField(max_length=255)
+    
+    def __str__(self):
+        return f"{self.title} (organized_by: {self.organizer.email})"
+    
+
 
 class ClassAttendance(models.Model):
     class_schedule = models.ForeignKey(ClassSchedule, on_delete=models.CASCADE, related_name='attendances')

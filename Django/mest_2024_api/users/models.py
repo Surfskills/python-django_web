@@ -12,6 +12,14 @@ class IMUser(AbstractUser):
     ]
     user_type = models.CharField(max_length=15, choices=USER_TYPE_CHOICES)
     date_created = models.DateTimeField(default=timezone.now)
+    first_name = models.CharField(max_length=155, blank=True)
+    middle_name = models.CharField(max_length=155, blank=True)
+    last_name = models.CharField(max_length=155, blank=True)
+    phone_number = models.CharField(max_length=20, blank=True)
+
+    def __str__ (self):
+     return f"{self.first_name} {self.last_name}"
+
 
 # Cohort Model
 class Cohort(models.Model):
@@ -24,6 +32,8 @@ class Cohort(models.Model):
     date_created = models.DateTimeField(default=timezone.now)
     date_modified = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(IMUser, on_delete=models.CASCADE, related_name='authored_cohorts')
+    def __str__(self):
+        return f"{name.self}"
 
 class CohortMember(models.Model):
     cohort = models.ForeignKey(Cohort, on_delete=models.CASCADE, related_name='members')
