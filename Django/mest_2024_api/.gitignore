@@ -6,3 +6,4 @@ db.sqlite3
 *.env
 media/
 my_nenv/
+.venv/
