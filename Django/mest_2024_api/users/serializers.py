@@ -8,3 +8,18 @@ class UserSerilizer(serializers.Serializer):
     username = serializers.CharField()
     email = serializers.CharField()
 
+class CohortSerializer(serializers.Serializer):
+    name = serializers.CharField()
+    description = serializers.CharField()
+    year = serializers.CharField()
+    start_date = serializers.CharField()
+    end_date = serializers.CharField()
+
+class CohortMemberSerializer(serializers.Serializer):
+    member = serializers.CharField()
+    cohort = serializers.CharField()
+    year = serializers.CharField()
+    start_date = serializers.CharField()
+    end_date = serializers.CharField()
+
+
