@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django.urls import path
-from . import views
+from .views import *
 
 urlpatterns = [
-    # Define your URL patterns here
-    # Example: path('profile/', views.profile, name='profile'),
+path("users/signup/", signup),
+path("users/signin/", user_login),
+path("users/forgot_password/", ForgotPasswordAPIView.as_view())
 ]

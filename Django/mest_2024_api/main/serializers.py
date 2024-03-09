@@ -1,31 +1,29 @@
-#create serializers for all models in main
 from rest_framework import serializers
+from main.models import *
+from users.serializers import *
+class CourseModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = ('id', 'name', 'description')
+        model = Course
 
 class CourseSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
     name = serializers.CharField()
-
-class ClassSerializers(serializers.Serializer):   
-    tittle = serializers.CharField()
     description = serializers.CharField()
-    start_date_and_time = serializers.CharField()
-    end_date_and_time = serializers.CharField()
-    organizer = serializers.CharField()
+    date_created = serializers.DateTimeField()
+
+class ClassScheduleSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    title = serializers.CharField()
+    description = serializers.CharField()
+    start_date_and_time = serializers.DateTimeField()
+    end_date_and_time = serializers.DateTimeField()
+    is_repeated = serializers.BooleanField()
+    repeat_frequency = serializers.CharField()
+    organizer = UserSerializer(many=False)
+    meeting_type = serializers.CharField()
+    facilitator = UserSerializer(many=False)
     venue = serializers.CharField()
-
-class ClassAttendanceSerializers(serializers.Serializer ):
-    attendee = serializers.CharField()
-    start_date_and_time = serializers.CharField()
-    end_date_and_time = serializers.CharField()
-
-class QuerySerializer(serializers.Serializer):
-    tittle = serializers.CharField()
-    description = serializers.CharField()
-    submitted_by = serializers.CharField()
-    status = serializers.CharField()
-    date_created = serializers.CharField()
-
-class QueryCommentserializer(serializers.Serializer):
-    comment = serializers.CharField()
-    date_created = serializers.CharField()
-   
-
+    course = CourseSerializer(many=False)
+    cohort = CohortSerializer(many=False)
+    date_created = serializers.DateTimeField()
